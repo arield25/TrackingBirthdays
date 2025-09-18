@@ -1,38 +1,59 @@
+// package com.trackingbirthdays;
+
+// import org.junit.jupiter.api.Test;
+// import static org.junit.jupiter.api.Assertions.*;
+
+// public class AppTest {
+
+//     @Test
+//     public void testSimpleTrue() {
+//         assertTrue(true, "This will always pass");
+//     }
+
+//     @Test
+//     public void testBirthdayMap() {
+//         BirthdayExample.initializeMap("src/main/resources/birthdayOnlyForTesting.json");
+
+//         // Example: check if a known test name exists
+//         String birthday = BirthdayExample.getBirthday("Alice");
+//         assertNotNull(birthday, "Alice should exist in the test data");
+//     }
+// }
+
 package com.trackingbirthdays;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
-        super( testName );
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+public class AppTest {
+
+    @BeforeAll
+    public static void setup() {
+        // initialize the hashmap with the test JSON
+        String testFilePath = "src/main/resources/birthdayOnlyForTesting.json";
+        BirthdayExample.initializeMap(testFilePath);
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    @Test
+    public void testExactMatch() {
+        String birthday = BirthdayExample.getBirthday("Rodrigo");
+        assertNotNull(birthday, "Birthday should not be null for Rodrigo");
+        assertEquals("03/15/1990", birthday, "Rodrigo's birthday should match");
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp()
-    {
-        assertTrue( true );
+    @Test
+    public void testUnknownName() {
+        String birthday = BirthdayExample.getBirthday("NonExistentName");
+        assertNull(birthday, "Birthday should be null for a name not in the list");
+    }
+
+    @Test
+    public void testPartialMatch() {
+        // Partial match logic is in main(), but getBirthday only returns exact
+        // So here we just test that exact keys work, partial matches are handled in main()
+        String birthday = BirthdayExample.getBirthday("Rodrigo");
+        assertNotNull(birthday, "Birthday should be found for partial matches using exact key");
     }
 }
