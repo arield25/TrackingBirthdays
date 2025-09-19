@@ -49,7 +49,7 @@ public class BirthdayTracker {
         }
     }
 
-    // NEW helper method for tests and external queries
+    // helper method for tests and external queries
     public static String getBirthday(String name) {
         return birthdayMap.get(name); // returns null if name not found
     }
@@ -61,25 +61,32 @@ public class BirthdayTracker {
         // initialize the hashmap
         initializeMap(pathToFile);
 
-        // read user input
+        // read user input in a loop
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter a name: ");
-        String name = input.nextLine();
+        while (true) {
+            System.out.print("\nEnter a name (or type 'exit' to quit): ");
+            String name = input.nextLine();
 
-        // check for exact match first
-        if (birthdayMap.containsKey(name)) {
-            System.out.println(name + "'s birthday is: " + birthdayMap.get(name));
-        } else {
-            // check for partial match
-            boolean found = false;
-            for (String key : birthdayMap.keySet()) {
-                if (key.toLowerCase().contains(name.toLowerCase())) {
-                    System.out.println(key + "'s birthday is: " + birthdayMap.get(key));
-                    found = true;
-                }
+            if (name.equalsIgnoreCase("exit")) {
+                System.out.println("Goodbye!");
+                break;
             }
-            if (!found) {
-                System.out.println("Birthday for " + name + " is unknown.");
+
+            // check for exact match first
+            if (birthdayMap.containsKey(name)) {
+                System.out.println(name + "'s birthday is: " + birthdayMap.get(name));
+            } else {
+                // check for partial match
+                boolean found = false;
+                for (String key : birthdayMap.keySet()) {
+                    if (key.toLowerCase().contains(name.toLowerCase())) {
+                        System.out.println(key + "'s birthday is: " + birthdayMap.get(key));
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    System.out.println("Birthday for " + name + " is unknown.");
+                }
             }
         }
 
