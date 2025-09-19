@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class BirthdayExample {
+public class BirthdayTracker {
 
     // private static hashmap to store the birthdays
     private static HashMap<String, String> birthdayMap = new HashMap<>();
