@@ -1,25 +1,3 @@
-// package com.trackingbirthdays;
-
-// import org.junit.jupiter.api.Test;
-// import static org.junit.jupiter.api.Assertions.*;
-
-// public class AppTest {
-
-//     @Test
-//     public void testSimpleTrue() {
-//         assertTrue(true, "This will always pass");
-//     }
-
-//     @Test
-//     public void testBirthdayMap() {
-//         BirthdayExample.initializeMap("src/main/resources/birthdayOnlyForTesting.json");
-
-//         // Example: check if a known test name exists
-//         String birthday = BirthdayExample.getBirthday("Alice");
-//         assertNotNull(birthday, "Alice should exist in the test data");
-//     }
-// }
-
 package com.trackingbirthdays;
 
 import static org.junit.jupiter.api.Assertions.*;
